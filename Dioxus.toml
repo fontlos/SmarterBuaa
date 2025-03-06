@@ -1,0 +1,20 @@
+[application]
+
+[web.app]
+title = "SmarterBuaa"
+
+[bundle]
+identifier = "com.fontlos.SmartBuaa"
+publisher = "Fontlos"
+icon = ["assets/icons/icon.ico"]
+copyright = "Fontlos"
+category = "App"
+short_description = "MAKE BUAA GREAT AGAIN"
+long_description = """
+A more powerful third-party app of something you know.
+This project is only for learning and sharing,
+please delete within 24 hours after downloading,
+all problems caused by the use are borne by the user,
+if there is any infringement I will delete this repository and software
+"""
+

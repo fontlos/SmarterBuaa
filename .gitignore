@@ -1,0 +1,7 @@
+/target
+
+*.apk
+fontlos.*
+android.bat
+Cargo.lock
+Justfile
