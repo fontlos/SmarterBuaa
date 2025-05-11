@@ -9,6 +9,9 @@ edition = "2024"
 [dependencies]
 dioxus = { version = "0.6.3", features = ["router"] }
 
+[target.'cfg(windows)'.build-dependencies]
+embed-resource = "3.0.2"
+
 [features]
 default = ["desktop"]
 desktop = ["dioxus/desktop"]
