@@ -1,11 +1,23 @@
 #[cfg(feature = "desktop")]
 pub fn desktop_config() -> dioxus::desktop::Config {
-    use dioxus::desktop::{LogicalSize, WindowBuilder, tao::window::Icon};
+    use dioxus::desktop::tao::event_loop::EventLoop;
+    use dioxus::desktop::{LogicalPosition, LogicalSize, WindowBuilder, tao::window::Icon};
     use image::imageops::{FilterType, resize};
 
     // 窗口大小
     let window_width = 1260;
     let window_height = 720;
+
+    // 获取屏幕大小
+    let event_loop = EventLoop::new();
+    let primary_monitor = event_loop.primary_monitor().unwrap();
+    let monitor_size = primary_monitor.size();
+    let monitor_width = monitor_size.width;
+    let monitor_height = monitor_size.height;
+
+    // 计算窗口居中位置
+    let x = (monitor_width - window_width) / 2;
+    let y = (monitor_height - window_height) / 2;
 
     // 生成窗口图标
     let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
@@ -28,6 +40,7 @@ pub fn desktop_config() -> dioxus::desktop::Config {
     let window = WindowBuilder::new()
         .with_window_icon(Some(window_icon))
         .with_inner_size(LogicalSize::new(window_width, window_height))
+        .with_position(LogicalPosition::new(x, y))
         .with_title("Smarter Buaa");
 
     // 对于 Windows 额外设置任务栏图标
