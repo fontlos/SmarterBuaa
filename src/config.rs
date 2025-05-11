@@ -59,41 +59,42 @@ pub fn desktop_config() -> dioxus::desktop::Config {
 #[inline]
 pub fn tray_config() {
     use dioxus::desktop::trayicon::{
-        DioxusTrayIcon,
-        menu::{AboutMetadata, Menu, MenuItem, PredefinedMenuItem},
+        DioxusTrayIcon, MouseButton, TrayIconEvent,
+        menu::{Menu, PredefinedMenuItem},
     };
+    use dioxus::desktop::{use_tray_icon_event_handler, use_window};
     use image::imageops::{FilterType, resize};
-    dioxus::prelude::use_hook(|| {
-        let tray_menu = Menu::new();
-        let quit = MenuItem::new("Quit", true, None);
-        let _ = tray_menu.append_items(&[
-            &PredefinedMenuItem::about(
-                None,
-                Some(AboutMetadata {
-                    name: Some("Test".to_string()),
-                    copyright: Some("Copyright 2025 Fontlos".to_string()),
-                    ..Default::default()
-                }),
-            ),
-            &PredefinedMenuItem::separator(),
-            &quit,
-        ]);
 
-        let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
-        let tray_icon_width = 32;
-        let tray_icon_height = 32;
-        let tray_icon = resize(
-            &icon,
-            tray_icon_width,
-            tray_icon_height,
-            FilterType::Lanczos3,
-        )
-        .into_vec();
+    let tray_menu = Menu::new();
+    let _ = tray_menu.append(&PredefinedMenuItem::quit(Some("Quit")));
 
-        let tray_icon =
-            DioxusTrayIcon::from_rgba(tray_icon, tray_icon_width, tray_icon_height).unwrap();
+    let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
+    let tray_icon_width = 32;
+    let tray_icon_height = 32;
+    let tray_icon = resize(
+        &icon,
+        tray_icon_width,
+        tray_icon_height,
+        FilterType::Lanczos3,
+    )
+    .into_vec();
 
-        let tray_icon = dioxus::desktop::trayicon::init_tray_icon(tray_menu, Some(tray_icon));
-        tray_icon.set_title(Some("Smarter Buaa"));
+    let tray_icon =
+        DioxusTrayIcon::from_rgba(tray_icon, tray_icon_width, tray_icon_height).unwrap();
+
+    let tray_icon = dioxus::desktop::trayicon::init_tray_icon(tray_menu, Some(tray_icon));
+    tray_icon.set_title(Some("Smarter Buaa"));
+
+    let window = use_window();
+
+    use_tray_icon_event_handler(move |event: &TrayIconEvent| match event {
+        TrayIconEvent::Click { button, .. } => {
+            if button == &MouseButton::Left {
+                window.set_visible(true);
+                window.set_minimized(false);
+                window.set_focus();
+            }
+        }
+        _ => {}
     });
 }
