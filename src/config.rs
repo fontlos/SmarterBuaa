@@ -30,5 +30,14 @@ pub fn desktop_config() -> dioxus::desktop::Config {
         .with_inner_size(LogicalSize::new(window_width, window_height))
         .with_title("Smarter Buaa");
 
+    // 对于 Windows 额外设置任务栏图标
+    #[cfg(target_os = "windows")]
+    let window = {
+        use dioxus::desktop::tao::platform::windows::WindowBuilderExtWindows;
+        let (width, height) = icon.dimensions();
+        let taskbar_icon = Icon::from_rgba(icon.into_raw(), width, height).unwrap();
+        window.with_taskbar_icon(Some(taskbar_icon))
+    };
+
     dioxus::desktop::Config::new().with_window(window)
 }
