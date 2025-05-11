@@ -1,4 +1,7 @@
 #[cfg(feature = "desktop")]
+const LOGO: &[u8] = include_bytes!("../assets/logo.png");
+
+#[cfg(feature = "desktop")]
 pub fn desktop_config() -> dioxus::desktop::Config {
     use dioxus::desktop::tao::event_loop::EventLoop;
     use dioxus::desktop::{LogicalPosition, LogicalSize, WindowBuilder, tao::window::Icon};
@@ -20,7 +23,7 @@ pub fn desktop_config() -> dioxus::desktop::Config {
     let y = (monitor_height - window_height) / 2;
 
     // 生成窗口图标
-    let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
+    let icon = image::load_from_memory(LOGO).unwrap().to_rgba8();
     let window_icon_width = 32;
     let window_icon_height = 32;
     let window_icon = resize(
@@ -68,7 +71,7 @@ pub fn tray_config() {
     let tray_menu = Menu::new();
     let _ = tray_menu.append(&PredefinedMenuItem::quit(Some("Quit")));
 
-    let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
+    let icon = image::load_from_memory(LOGO).unwrap().to_rgba8();
     let tray_icon_width = 32;
     let tray_icon_height = 32;
     let tray_icon = resize(
