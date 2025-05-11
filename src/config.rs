@@ -54,3 +54,46 @@ pub fn desktop_config() -> dioxus::desktop::Config {
 
     dioxus::desktop::Config::new().with_window(window)
 }
+
+#[cfg(feature = "desktop")]
+#[inline]
+pub fn tray_config() {
+    use dioxus::desktop::trayicon::{
+        DioxusTrayIcon,
+        menu::{AboutMetadata, Menu, MenuItem, PredefinedMenuItem},
+    };
+    use image::imageops::{FilterType, resize};
+    dioxus::prelude::use_hook(|| {
+        let tray_menu = Menu::new();
+        let quit = MenuItem::new("Quit", true, None);
+        let _ = tray_menu.append_items(&[
+            &PredefinedMenuItem::about(
+                None,
+                Some(AboutMetadata {
+                    name: Some("Test".to_string()),
+                    copyright: Some("Copyright 2025 Fontlos".to_string()),
+                    ..Default::default()
+                }),
+            ),
+            &PredefinedMenuItem::separator(),
+            &quit,
+        ]);
+
+        let icon = image::open("./assets/logo.png").unwrap().to_rgba8();
+        let tray_icon_width = 32;
+        let tray_icon_height = 32;
+        let tray_icon = resize(
+            &icon,
+            tray_icon_width,
+            tray_icon_height,
+            FilterType::Lanczos3,
+        )
+        .into_vec();
+
+        let tray_icon =
+            DioxusTrayIcon::from_rgba(tray_icon, tray_icon_width, tray_icon_height).unwrap();
+
+        let tray_icon = dioxus::desktop::trayicon::init_tray_icon(tray_menu, Some(tray_icon));
+        tray_icon.set_title(Some("Smarter Buaa"));
+    });
+}
