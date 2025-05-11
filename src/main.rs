@@ -1,12 +1,6 @@
-use dioxus::prelude::*;
+mod app;
+mod ui;
 
 fn main() {
-    dioxus::launch(App);
-}
-
-#[component]
-fn App() -> Element {
-    rsx! {
-        "Hello World"
-    }
+    app::launch();
 }
