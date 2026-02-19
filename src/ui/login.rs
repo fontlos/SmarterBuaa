@@ -6,7 +6,7 @@ pub fn LoginPage() -> Element {
     rsx!{
         link {
             rel: "stylesheet",
-            href: asset!("./assets/css/login-page.css"),
+            href: asset!("/assets/css/login-page.css"),
         }
         div {
             class: "container {state}",

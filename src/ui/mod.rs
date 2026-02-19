@@ -13,7 +13,7 @@ pub fn App() -> Element {
     #[cfg(feature = "desktop")]
     crate::config::tray_config();
     rsx! {
-        document::Link { rel: "stylesheet", href: asset!("./assets/css/base.css") }
+        document::Link { rel: "stylesheet", href: asset!("/assets/css/base.css") }
         Router::<Route> {}
     }
 }

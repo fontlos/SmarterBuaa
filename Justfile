@@ -8,14 +8,14 @@ default:
 # Build for Windows
 windows:
     mkdir dist
-    dx build --platform windows -r
+    dx build -r --windows
     cp --recursive ./target/dx/smarter-buaa/release/windows/app ./dist/SmarterBuaa-x86_64-windows-msvc --force
 alias w := windows
 
 # Build for Android
 android:  _android_remove_private_config _android_add_private_config && _android_remove_private_config
     mkdir dist
-    dx build --platform android --arch arm64 -r
+    dx build -r --android --target aarch64-linux-android
     cp ./target/dx/smarter-buaa/release/android/app/app/build/outputs/apk/release/app-release.apk ./dist/SmarterBuaa-aarch64-linux-android.apk --force
 alias a := android
 

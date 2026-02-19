@@ -2,6 +2,7 @@
 name = "SmarterBuaa"
 default_platform = "desktop"
 asset_dir = "static"
+# android_manifest = ""
 
 [web.app]
 title = "SmarterBuaa"
@@ -9,7 +10,10 @@ title = "SmarterBuaa"
 [bundle]
 identifier = "com.fontlos.smarterbuaa"
 publisher = "Fontlos"
-icon = ["assets/logo.png"]
+icon = [
+    "assets/logo.png",
+    "assets/logo.svg"
+]
 copyright = "Copyright 2025 Fontlos"
 category = "Utility"
 short_description = "MAKE BUAA GREAT AGAIN"
