@@ -5,19 +5,25 @@ set shell := ["nu", "-c"]
 default:
     just --list
 
+# Debug for Windows
+w:
+    dx serve --windows
+
 # Build for Windows
 windows:
     mkdir dist
     dx build -r --windows
     cp --recursive ./target/dx/smarter-buaa/release/windows/app ./dist/SmarterBuaa-x86_64-windows-msvc --force
-alias w := windows
+
+# Debug for Android
+a:
+    dx serve --android --target aarch64-linux-android
 
 # Build for Android
 android:  _android_remove_private_config _android_add_private_config && _android_remove_private_config
     mkdir dist
     dx build -r --android --target aarch64-linux-android
     cp ./target/dx/smarter-buaa/release/android/app/app/build/outputs/apk/release/app-release.apk ./dist/SmarterBuaa-aarch64-linux-android.apk --force
-alias a := android
 
 # Android Build Auxiliary Recipe
 _jks_encoder:

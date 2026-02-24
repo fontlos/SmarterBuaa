@@ -3,15 +3,15 @@ mod login;
 use dioxus::prelude::*;
 
 #[derive(Routable, PartialEq, Clone)]
-enum Route{
+enum Route {
     #[route("/", login::LoginPage)]
-    Login {}
+    Login {},
 }
 
 #[component]
 pub fn App() -> Element {
     #[cfg(feature = "desktop")]
-    crate::config::tray_config();
+    crate::config::desktop::tray();
     rsx! {
         document::Link { rel: "stylesheet", href: asset!("/assets/css/base.css") }
         Router::<Route> {}

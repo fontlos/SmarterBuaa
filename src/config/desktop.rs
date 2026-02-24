@@ -1,12 +1,17 @@
-#[cfg(feature = "desktop")]
-const LOGO: &[u8] = include_bytes!("../assets/logo.png");
+use dioxus::desktop::Config;
+use dioxus::desktop::tao::event_loop::EventLoop;
+use dioxus::desktop::{LogicalPosition, LogicalSize, WindowBuilder, tao::window::Icon};
+use dioxus::desktop::{use_tray_icon_event_handler, use_window};
+use image::imageops::{FilterType, resize};
 
-#[cfg(feature = "desktop")]
-pub fn desktop_config() -> dioxus::desktop::Config {
-    use dioxus::desktop::tao::event_loop::EventLoop;
-    use dioxus::desktop::{LogicalPosition, LogicalSize, WindowBuilder, tao::window::Icon};
-    use image::imageops::{FilterType, resize};
+use dioxus::desktop::trayicon::{
+    self, DioxusTrayIcon, MouseButton, TrayIconEvent,
+    menu::{Menu, PredefinedMenuItem},
+};
 
+const LOGO: &[u8] = include_bytes!("../../assets/logo.png");
+
+pub fn config() -> Config {
     // 窗口大小
     let window_width = 1260;
     let window_height = 720;
@@ -55,19 +60,10 @@ pub fn desktop_config() -> dioxus::desktop::Config {
         window.with_taskbar_icon(Some(taskbar_icon))
     };
 
-    dioxus::desktop::Config::new().with_window(window)
+    Config::new().with_window(window)
 }
 
-#[cfg(feature = "desktop")]
-#[inline]
-pub fn tray_config() {
-    use dioxus::desktop::trayicon::{
-        DioxusTrayIcon, MouseButton, TrayIconEvent,
-        menu::{Menu, PredefinedMenuItem},
-    };
-    use dioxus::desktop::{use_tray_icon_event_handler, use_window};
-    use image::imageops::{FilterType, resize};
-
+pub fn tray() {
     let tray_menu = Menu::new();
     let _ = tray_menu.append(&PredefinedMenuItem::quit(Some("Quit")));
 
@@ -85,7 +81,7 @@ pub fn tray_config() {
     let tray_icon =
         DioxusTrayIcon::from_rgba(tray_icon, tray_icon_width, tray_icon_height).unwrap();
 
-    let tray_icon = dioxus::desktop::trayicon::init_tray_icon(tray_menu, Some(tray_icon));
+    let tray_icon = trayicon::init_tray_icon(tray_menu, Some(tray_icon));
     tray_icon.set_title(Some("Smarter Buaa"));
 
     let window = use_window();

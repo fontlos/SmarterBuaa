@@ -17,21 +17,13 @@
 - For Windows
 
 ```sh
-dx build --platform windows -r
+dx build -r --windows
 ```
 
-- For Android
+- For Android (No sign)
 
 ```sh
 # Set up JDK, Android SDK, Android NDK 28.0.12433566
 # rustup target install aarch64-linux-android
-dx build --platform android --arch arm64 -r
-```
-
-If you create an empty file in `./private/.env`, you can use `just` command to build and copy artifact to `./dist`
-
-```sh
-just windows
-# or
-just android
+dx build -r --android --target aarch64-linux-android
 ```

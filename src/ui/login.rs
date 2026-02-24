@@ -3,7 +3,8 @@ use dioxus::prelude::*;
 #[component]
 pub fn LoginPage() -> Element {
     let mut state = use_signal(|| "");
-    rsx!{
+    let mut account = use_signal(|| String::new());
+    rsx! {
         link {
             rel: "stylesheet",
             href: asset!("/assets/css/login-page.css"),
@@ -12,6 +13,7 @@ pub fn LoginPage() -> Element {
             class: "container {state}",
             div {
                 class: "form-box account",
+                // 选择或添加账户
                 form {
                     h1{ "Account" }
                     div {
@@ -20,6 +22,9 @@ pub fn LoginPage() -> Element {
                             r#type: "text",
                             placeholder: "Account",
                             required: "required",
+                            oninput: move |e| {
+                                account.set(e.value());
+                            },
                         }
                     }
                     button {
@@ -29,6 +34,7 @@ pub fn LoginPage() -> Element {
                 }
             }
 
+            // 登陆账户
             div {
                 class: "form-box login",
                 form {
@@ -55,6 +61,7 @@ pub fn LoginPage() -> Element {
                 }
             }
 
+            // 切换面板
             div {
                 class: "toggle-box",
                 div {
@@ -72,7 +79,7 @@ pub fn LoginPage() -> Element {
                 div {
                     class: "toggle-panel toggle-left",
                     h1 { "Welcome back!" }
-                    p { "Switch account" }
+                    p { "User {account}" }
                     button {
                         class: "btn account-btn",
                         onclick: move |_| {

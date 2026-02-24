@@ -12,7 +12,7 @@ identifier = "com.fontlos.smarterbuaa"
 publisher = "Fontlos"
 icon = [
     "assets/logo.png",
-    "assets/logo.svg"
+    # "assets/logo.svg"
 ]
 copyright = "Copyright 2025 Fontlos"
 category = "Utility"

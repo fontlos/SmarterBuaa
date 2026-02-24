@@ -1,9 +1,13 @@
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
 
-mod app;
 mod config;
 mod ui;
 
 fn main() {
-    app::launch();
+    use dioxus::LaunchBuilder;
+    #[cfg(feature = "desktop")]
+    let launcher = LaunchBuilder::desktop().with_cfg(crate::config::desktop::config());
+    #[cfg(feature = "mobile")]
+    let launcher = LaunchBuilder::mobile();
+    launcher.launch(crate::ui::App);
 }
