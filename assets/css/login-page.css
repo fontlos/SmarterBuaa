@@ -1,33 +1,17 @@
-@font-face {
-    font-family: "Poppins";
-    /* 静态资源位于static, 会被复制到 assets 下 */
-    src: url("./font/Poppins-Regular.woff2") format("woff2");
-    font-display: swap;
-}
-
-html,
-body,
-div,
-p,
-a,
-button,
-input,
-h1,
-form {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    text-decoration: none;
-    list-style: none;
-}
-
 body {
+    font-family: "Poppins", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(90deg, #e2e2e2, #c9d6ff);
+}
+
+/* 挂载时移除动画 */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+    animation: none !important;
 }
 
 .container {
@@ -199,7 +183,7 @@ form {
 
 @media screen and (max-width: 650px) {
     .container {
-        height: 100vh;
+        height: 100dvh;
         width: 100vw;
         margin: 0;
         border-radius: 0;
@@ -214,7 +198,7 @@ form {
 
     .container.to-login .form-box {
         left: 0;
-        top: 30%;
+        top: 15%;
     }
 
     .toggle-box::before {

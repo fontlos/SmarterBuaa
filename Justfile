@@ -13,7 +13,7 @@ w:
 windows:
     mkdir dist
     dx build -r --windows
-    cp --recursive ./target/dx/smarter-buaa/release/windows/app ./dist/SmarterBuaa-x86_64-windows-msvc --force
+    mv ./target/dx/smarter-buaa/release/windows/app/* ./dist/SmarterBuaa-x86_64-windows-msvc --force
 
 # Debug for Android
 a:
@@ -23,7 +23,7 @@ a:
 android:  _android_remove_private_config _android_add_private_config && _android_remove_private_config
     mkdir dist
     dx build -r --android --target aarch64-linux-android
-    cp ./target/dx/smarter-buaa/release/android/app/app/build/outputs/apk/release/app-release.apk ./dist/SmarterBuaa-aarch64-linux-android.apk --force
+    mv ./target/dx/smarter-buaa/release/android/app/app/build/outputs/apk/release/app-release.apk ./dist/SmarterBuaa-aarch64-linux-android.apk --force
 
 # Android Build Auxiliary Recipe
 _jks_encoder:

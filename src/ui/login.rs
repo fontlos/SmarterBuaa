@@ -2,7 +2,14 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn LoginPage() -> Element {
+    // 挂载元素后再启用动画避免抖动, 此类在 base.css
+    let mut load = use_signal(|| "no-transition");
+    use_effect(move || {
+        load.set("");
+    });
+    // 页面状态
     let mut state = use_signal(|| "");
+    // 活跃账户
     let mut account = use_signal(|| String::new());
     rsx! {
         link {
@@ -10,7 +17,7 @@ pub fn LoginPage() -> Element {
             href: asset!("/assets/css/login-page.css"),
         }
         div {
-            class: "container {state}",
+            class: "container {state} {load}",
             div {
                 class: "form-box account",
                 // 选择或添加账户
