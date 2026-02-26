@@ -54,7 +54,7 @@ jobs:
       run: rustup target install aarch64-linux-android
 
     - name: Install Dioxus CLI
-      run: http get https://github.com/fontlos/dioxus/releases/download/v0.6.3-alpha/dx.exe | save dx.exe
+      run: http get https://github.com/fontlos/dioxus/releases/download/v0.7.3-alpha/dx.exe | save dx.exe
 
     - name: Setup JDK
       if: matrix.target == 'android'
