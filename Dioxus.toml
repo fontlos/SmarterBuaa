@@ -1,7 +1,6 @@
 [application]
 name = "SmarterBuaa"
 default_platform = "desktop"
-asset_dir = "static" # embed assets
 android_manifest = "./assets/AndroidManifest.xml"
 
 [web.app]

@@ -1,7 +1,7 @@
 @font-face {
     font-family: "Poppins";
     /* 静态资源位于static, 嵌入程序 */
-    src: url("./font/Poppins-Regular.woff2") format("woff2");
+    src: url("./Poppins-Regular.woff2") format("woff2");
     font-display: swap;
 }
 
