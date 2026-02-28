@@ -1,6 +1,6 @@
 #[cfg(target_os = "windows")]
 fn main() {
-    embed_resource::compile("./assets/icon/icon.rc", embed_resource::NONE)
+    embed_resource::compile("./assets/windows/icon.rc", embed_resource::NONE)
         .manifest_optional()
         .unwrap();
 }
