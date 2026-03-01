@@ -9,8 +9,24 @@ pub fn LoginPage() -> Element {
     });
     // 页面状态
     let mut state = use_signal(|| "");
+    // 账号列表
+    let mut accounts = use_signal(Vec::<String>::new);
     // 活跃账户
-    let mut account = use_signal(|| String::new());
+    let mut account = use_signal(String::new);
+
+    let mut show_list = use_signal(|| false);
+    let account_list = accounts.iter().map(|a| {
+        rsx! {
+            div {
+                class: "account-item",
+                onclick: {
+                    let a = a.clone();
+                    move |_| { account.set(a.clone()); show_list.set(false); }
+                },
+                "{a}"
+            }
+        }
+    });
     rsx! {
         link {
             rel: "stylesheet",
@@ -28,14 +44,33 @@ pub fn LoginPage() -> Element {
                         input {
                             r#type: "text",
                             placeholder: "Account",
-                            required: "required",
+                            value: "{account}",
                             oninput: move |e| {
                                 account.set(e.value());
                             },
                         }
+                        button {
+                            class: "arrow-btn",
+                            onclick: move |_| show_list.set(!show_list()),
+                            img {
+                                src: asset!("/assets/icon/drop.svg"),
+                            }
+                        }
+                        {if show_list() && !accounts.is_empty() {
+                            rsx! {
+                                div { class: "account-dropdown",
+                                    {account_list}
+                                }
+                            }
+                        } else { rsx!() }}
                     }
                     button {
                         class: "btn",
+                        onclick: move |_| {
+                            if !account.is_empty() && !accounts().contains(&account()) {
+                                accounts.push(account());
+                            }
+                        },
                         "Add"
                     }
                 }

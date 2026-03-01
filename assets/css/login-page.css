@@ -92,6 +92,35 @@ form {
     font-weight: 400;
 }
 
+.arrow-btn {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    width: 24px; height: 24px;
+    border: none; background: none;
+    cursor: pointer;
+    background-image: url("./icon/drop.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.account-dropdown {
+    position: absolute;
+    top: 100%; left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    z-index: 10;
+}
+.account-item {
+    padding: 8px 20px;
+    cursor: pointer;
+}
+.account-item:hover { background: #f0f0f0; }
+
 .forgot-link {
     margin: -15px 0 15px;
 }
