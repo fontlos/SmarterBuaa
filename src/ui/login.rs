@@ -1,7 +1,12 @@
+use buaa_api::Context;
 use dioxus::prelude::*;
+
+use super::Route;
 
 #[component]
 pub fn LoginPage() -> Element {
+    let nav = navigator();
+    let ctx = use_context::<std::rc::Rc<Context>>();
     // 挂载元素后再启用动画避免抖动, 此类在 base.css
     let mut load = use_signal(|| "no-transition");
     use_effect(move || {
@@ -12,7 +17,8 @@ pub fn LoginPage() -> Element {
     // 账号列表
     let mut accounts = use_signal(Vec::<String>::new);
     // 活跃账户
-    let mut account = use_signal(String::new);
+    let mut username = use_signal(String::new);
+    let mut password = use_signal(String::new);
 
     let mut show_list = use_signal(|| false);
     let account_list = accounts.iter().map(|a| {
@@ -21,7 +27,7 @@ pub fn LoginPage() -> Element {
                 class: "account-item",
                 onclick: {
                     let a = a.clone();
-                    move |_| { account.set(a.clone()); show_list.set(false); }
+                    move |_| { username.set(a.clone()); show_list.set(false); }
                 },
                 "{a}"
             }
@@ -44,9 +50,9 @@ pub fn LoginPage() -> Element {
                         input {
                             r#type: "text",
                             placeholder: "Account",
-                            value: "{account}",
+                            value: "{username}",
                             oninput: move |e| {
-                                account.set(e.value());
+                                username.set(e.value());
                             },
                         }
                         button {
@@ -67,8 +73,8 @@ pub fn LoginPage() -> Element {
                     button {
                         class: "btn",
                         onclick: move |_| {
-                            if !account.is_empty() && !accounts().contains(&account()) {
-                                accounts.push(account());
+                            if !username.is_empty() && !accounts().contains(&username()) {
+                                accounts.push(username());
                             }
                         },
                         "Add"
@@ -87,6 +93,9 @@ pub fn LoginPage() -> Element {
                             r#type: "password",
                             placeholder: "Password",
                             required: "required",
+                            oninput: move |e| {
+                                password.set(e.value());
+                            },
                         }
                     }
                     div {
@@ -98,6 +107,17 @@ pub fn LoginPage() -> Element {
                     }
                     button {
                         class: "btn",
+                        onclick: move |_| {
+                            let ctx = ctx.clone();
+                            ctx.set_account(&username(), &password());
+                            spawn(async move {
+                                if ctx.login().await.is_ok() {
+                                    nav.push(Route::Schedule {});
+                                } else {
+                                    // 登录失败提示
+                                }
+                            });
+                        },
                         "Login"
                     }
                 }
@@ -121,7 +141,7 @@ pub fn LoginPage() -> Element {
                 div {
                     class: "toggle-panel toggle-left",
                     h1 { "Welcome back!" }
-                    p { "User {account}" }
+                    p { "User {username}" }
                     button {
                         class: "btn account-btn",
                         onclick: move |_| {
