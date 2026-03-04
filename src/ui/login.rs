@@ -39,7 +39,7 @@ pub fn LoginPage() -> Element {
             href: asset!("/assets/css/login-page.css"),
         }
         div {
-            class: "container {state} {load}",
+            class: "login-container {state} {load}",
             div {
                 class: "form-box account",
                 // 选择或添加账户

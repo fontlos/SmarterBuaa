@@ -7,7 +7,7 @@ edition = "2024"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-buaa_api = { git = "https://github.com/fontlos/buaa-api", rev = "6db6b6c"}
+buaa_api = { git = "https://github.com/fontlos/buaa-api", rev = "00c1043"}
 dioxus = { version = "0.7.3", features = ["router"] }
 image = "0.25.9"
 

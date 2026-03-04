@@ -253,7 +253,7 @@ dependencies = [
 [[package]]
 name = "buaa_api"
 version = "0.1.0"
-source = "git+https://github.com/fontlos/buaa-api?rev=6db6b6c#6db6b6c099151824279adec731be2bd2ca89bbaf"
+source = "git+https://github.com/fontlos/buaa-api?rev=00c1043#00c1043a24758c1d4002a40fb7a1a3026602e07b"
 dependencies = [
  "base64",
  "bytes",

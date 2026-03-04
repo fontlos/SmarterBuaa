@@ -14,7 +14,7 @@ body {
     animation: none !important;
 }
 
-.container {
+.login-container {
     position: relative;
     width: 850px;
     height: 550px;
@@ -25,21 +25,21 @@ body {
     overflow: hidden;
 }
 
-.container h1 {
+.login-container h1 {
     font-size: 36px;
     margin: -10px 0;
 }
 
-.container p {
+.login-container p {
     font-size: 14.5px;
     margin: 15px 0;
 }
 
-form {
+.login-container form {
     width: 100%;
 }
 
-.form-box {
+.login-container .form-box {
     position: absolute;
     left: 0;
     width: 50%;
@@ -54,28 +54,28 @@ form {
     transition: .3s ease-in-out .6s, visibility 0s .5s;
 }
 
-.container.to-login .form-box {
+.login-container.to-login .form-box {
     left: 50%;
 }
 
-.form-box.login {
+.login-container .form-box.login {
     visibility: hidden;
 }
 
-.container.to-login .form-box.login {
+.login-container.to-login .form-box.login {
     visibility: visible;
 }
 
-.container.to-login .form-box.account {
+.login-container.to-login .form-box.account {
     visibility: hidden;
 }
 
-.input-box {
+.login-container .input-box {
     position: relative;
     margin: 30px 0;
 }
 
-.input-box input {
+.login-container .input-box input {
     width: 100%;
     padding: 13px 50px 13px 20px;
     background: #eee;
@@ -87,12 +87,12 @@ form {
     font-weight: 500;
 }
 
-.input-box input::placeholder {
+.login-container .input-box input::placeholder {
     color: #888;
     font-weight: 400;
 }
 
-.arrow-btn {
+.login-container .arrow-btn {
     position: absolute;
     right: 20px; top: 50%;
     transform: translateY(-50%);
@@ -103,7 +103,7 @@ form {
     background-repeat: no-repeat;
     background-size: contain;
 }
-.account-dropdown {
+.login-container .account-dropdown {
     position: absolute;
     top: 100%; left: 0;
     width: 100%;
@@ -115,22 +115,22 @@ form {
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
     z-index: 10;
 }
-.account-item {
+.login-container .account-item {
     padding: 8px 20px;
     cursor: pointer;
 }
-.account-item:hover { background: #f0f0f0; }
+.login-container .account-item:hover { background: #f0f0f0; }
 
-.forgot-link {
+.login-container .forgot-link {
     margin: -15px 0 15px;
 }
 
-.forgot-link a {
+.login-container .forgot-link a {
     font-size: 14.5px;
     color: #333;
 }
 
-.btn {
+.login-container .btn {
     width: 100%;
     height: 48px;
     background: #7494ec;
@@ -143,13 +143,13 @@ form {
     font-weight: 600;
 }
 
-.toggle-box {
+.login-container .toggle-box {
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
-.toggle-box::before {
+.login-container .toggle-box::before {
     content: '';
     position: absolute;
     right: -250%;
@@ -161,11 +161,11 @@ form {
     transition: .9s ease-in-out;
 }
 
-.container.to-login .toggle-box::before {
+.login-container.to-login .toggle-box::before {
     right: 50%;
 }
 
-.toggle-panel {
+.login-container .toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -178,31 +178,31 @@ form {
     transition: .3s ease-in-out;
 }
 
-.toggle-panel.toggle-right {
+.login-container .toggle-panel.toggle-right {
     right: 0;
     transition-delay: .6s;
 }
 
-.container.to-login .toggle-panel.toggle-right {
+.login-container.to-login .toggle-panel.toggle-right {
     right: -50%;
     transition-delay: .3s;
 }
 
-.toggle-panel.toggle-left {
+.login-container .toggle-panel.toggle-left {
     left: -50%;
     transition-delay: .3s;
 }
 
-.container.to-login .toggle-panel.toggle-left {
+.login-container.to-login .toggle-panel.toggle-left {
     left: 0;
     transition-delay: .6s;
 }
 
-.toggle-panel p {
+.login-container .toggle-panel p {
     margin-bottom: 20px;
 }
 
-.toggle-panel .btn {
+.login-container .toggle-panel .btn {
     width: 160px;
     height: 46px;
     background: transparent;
@@ -211,7 +211,7 @@ form {
 }
 
 @media screen and (max-width: 650px) {
-    .container {
+    .login-container {
         height: 100dvh;
         width: 100vw;
         margin: 0;
@@ -219,18 +219,18 @@ form {
         box-shadow: none;
     }
 
-    .form-box {
+    .login-container .form-box {
         top: 0;
         width: 100%;
         height: 70%;
     }
 
-    .container.to-login .form-box {
+    .login-container.to-login .form-box {
         left: 0;
         top: 15%;
     }
 
-    .toggle-box::before {
+    .login-container .toggle-box::before {
         right: 0;
         bottom: -270%;
         width: 100%;
@@ -238,41 +238,41 @@ form {
         border-radius: 20vw;
     }
 
-    .container.to-login .toggle-box::before {
+    .login-container.to-login .toggle-box::before {
         right: 0;
         bottom: 70%;
     }
 
-    .container.to-login .toggle-panel.toggle-right {
+    .login-container.to-login .toggle-panel.toggle-right {
         right: 0;
         bottom: -30%;
     }
 
-    .toggle-panel {
+    .login-container .toggle-panel {
         width: 100%;
         height: 30%;
     }
 
-    .toggle-panel.toggle-right {
+    .login-container .toggle-panel.toggle-right {
         bottom: 0;
     }
 
-    .toggle-panel.toggle-left {
+    .login-container .toggle-panel.toggle-left {
         left: 0;
         top: -30%;
     }
 
-    .container.to-login .toggle-panel.toggle-left {
+    .login-container.to-login .toggle-panel.toggle-left {
         top: 0;
     }
 }
 
 @media screen and (max-width: 400px) {
-    .form-box {
+    .login-container .form-box {
         padding: 20px;
     }
 
-    .toggle-panel h1 {
+    .login-container .toggle-panel h1 {
         font-size: 30px;
     }
 }
