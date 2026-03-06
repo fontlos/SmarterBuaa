@@ -1,15 +1,15 @@
+mod dashboard;
 mod login;
-mod schedule;
 
 use buaa_api::Context;
 use dioxus::prelude::*;
 
 #[derive(Routable, PartialEq, Clone)]
 pub enum Route {
-    #[route("/", login::LoginPage)]
+    #[route("/", login::Login)]
     Login {},
-    #[route("/schedule", schedule::SchedulePage)]
-    Schedule {},
+    #[route("/schedule", dashboard::Dashboard)]
+    Dashboard {},
 }
 
 #[component]

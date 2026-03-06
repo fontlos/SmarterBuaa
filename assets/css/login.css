@@ -58,11 +58,11 @@ body {
     left: 50%;
 }
 
-.login-container .form-box.login {
+.login-container .form-box.password {
     visibility: hidden;
 }
 
-.login-container.to-login .form-box.login {
+.login-container.to-login .form-box.password {
     visibility: visible;
 }
 

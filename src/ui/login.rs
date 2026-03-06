@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 use super::Route;
 
 #[component]
-pub fn LoginPage() -> Element {
+pub fn Login() -> Element {
     let nav = navigator();
     let ctx = use_context::<std::rc::Rc<Context>>();
     // 挂载元素后再启用动画避免抖动, 此类在 base.css
@@ -36,7 +36,7 @@ pub fn LoginPage() -> Element {
     rsx! {
         link {
             rel: "stylesheet",
-            href: asset!("/assets/css/login-page.css"),
+            href: asset!("/assets/css/login.css"),
         }
         div {
             class: "login-container {state} {load}",
@@ -84,7 +84,7 @@ pub fn LoginPage() -> Element {
 
             // 登陆账户
             div {
-                class: "form-box login",
+                class: "form-box password",
                 form {
                     h1{ "Login" }
                     div {
@@ -112,7 +112,7 @@ pub fn LoginPage() -> Element {
                             ctx.set_account(&username(), &password());
                             spawn(async move {
                                 if ctx.login().await.is_ok() {
-                                    nav.push(Route::Schedule {});
+                                    nav.push(Route::Dashboard {});
                                 } else {
                                     // 登录失败提示
                                 }
