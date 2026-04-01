@@ -1,4 +1,3 @@
-use buaa_api::Context;
 use buaa_api::time::DateTime;
 use dioxus::prelude::*;
 
@@ -11,12 +10,9 @@ pub fn Dashboard() -> Element {
 
 #[component]
 pub fn ScheduleList() -> Element {
-    let ctx = use_context::<std::rc::Rc<Context>>();
-
     let class_schedule = use_resource(move || {
-        let ctx = ctx.clone();
         async move {
-            let class = ctx.class();
+            let class = crate::ctx().class();
             let now = DateTime::now();
             let res = class.query_schedule(&now).await?;
             buaa_api::Result::Ok(res)

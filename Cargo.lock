@@ -253,7 +253,7 @@ dependencies = [
 [[package]]
 name = "buaa_api"
 version = "0.1.0"
-source = "git+https://github.com/fontlos/buaa-api?rev=00c1043#00c1043a24758c1d4002a40fb7a1a3026602e07b"
+source = "git+https://github.com/fontlos/buaa-api?rev=45bd87e#45bd87e7f2f734bf4a54223aa087a20386928246"
 dependencies = [
  "base64",
  "bytes",
@@ -262,7 +262,6 @@ dependencies = [
  "reqwest",
  "serde",
  "serde_json",
- "time",
 ]
 
 [[package]]
@@ -4446,6 +4445,7 @@ dependencies = [
  "dioxus",
  "embed-resource",
  "image",
+ "tokio",
 ]
 
 [[package]]
@@ -4828,9 +4828,9 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "tokio"
-version = "1.49.0"
+version = "1.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72a2903cd7736441aac9df9d7688bd0ce48edccaadf181c3b90be801e81d3d86"
+checksum = "27ad5e34374e03cfffefc301becb44e9dc3c17584f414349ebe29ed26661822d"
 dependencies = [
  "bytes",
  "libc",

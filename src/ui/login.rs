@@ -1,4 +1,3 @@
-use buaa_api::Context;
 use dioxus::prelude::*;
 
 use super::Route;
@@ -6,7 +5,6 @@ use super::Route;
 #[component]
 pub fn Login() -> Element {
     let nav = navigator();
-    let ctx = use_context::<std::rc::Rc<Context>>();
     // 挂载元素后再启用动画避免抖动, 此类在 base.css
     let mut load = use_signal(|| "no-transition");
     use_effect(move || {
@@ -108,7 +106,7 @@ pub fn Login() -> Element {
                     button {
                         class: "btn",
                         onclick: move |_| {
-                            let ctx = ctx.clone();
+                            let ctx = crate::ctx();
                             ctx.set_account(&username(), &password());
                             spawn(async move {
                                 if ctx.login().await.is_ok() {
